@@ -1,5 +1,7 @@
 import 'package:ala_pos/data/remote/user_remote_source.dart';
 import 'package:ala_pos/domain/models/user/change_password_model.dart';
+import 'package:ala_pos/domain/models/user/permission_model.dart';
+import 'package:ala_pos/domain/models/user/role_model.dart';
 import 'package:ala_pos/domain/models/user/user_profile_model.dart';
 import 'package:ala_pos/domain/models/user_model.dart';
 import 'package:core/core.dart';
@@ -29,8 +31,29 @@ class UserRepository {
       }
 
       UserModel data = UserModel.fromJson(response.data);
-
+      storage.store<UserModel>(Constant.userModel, data);
       storage.setValue(Constant.userLogin, data.toJson());
+
+      return Right(data);
+    } catch (e) {
+      return Left(FailureModel.serverError(e.toString()));
+    }
+  }
+
+  Future<Either<FailureModel, RoleModel>> rolePermission() async {
+    try {
+      var userLogin = await storage.getValueJson(Constant.userLogin);
+      var userModel = UserModel.fromJson(userLogin);
+      ApiResponse response = await userRemoteSource.rolePermission(userModel.id.toString());
+
+      if (response.status == false) {
+        throw Exception(response.message);
+      }
+
+      RoleModel data = RoleModel.fromJson(response.data);
+
+      storage.store<RoleModel>(Constant.userRole, data);
+      storage.storeList<PermissionModel>(Constant.userPermissionList, data.permissions);
 
       return Right(data);
     } catch (e) {

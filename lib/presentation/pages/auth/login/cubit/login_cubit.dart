@@ -1,4 +1,5 @@
 import 'package:ala_pos/domain/repositories/store_repository.dart';
+import 'package:ala_pos/domain/repositories/user_repository.dart';
 import 'package:ala_pos/presentation/fields/fields.dart';
 import 'package:bloc/bloc.dart';
 import 'package:formz/formz.dart';
@@ -13,8 +14,9 @@ part 'login_cubit.freezed.dart';
 class LoginCubit extends Cubit<LoginState> {
   final AuthRepository _authRepository;
   final StoreRepository storeRepository;
+  final UserRepository userRepository;
 
-  LoginCubit(AuthRepository authRepository, this.storeRepository)
+  LoginCubit(AuthRepository authRepository, this.storeRepository, this.userRepository)
       : _authRepository = authRepository,
         super(LoginState());
 
@@ -24,7 +26,7 @@ class LoginCubit extends Cubit<LoginState> {
       emit(state.copyWith(
         statusSubmission: FormzStatus.submissionInProgress,
       ));
-      print(state.toString());
+
       // emit(LoginState.loading());
       var signInAction = await _authRepository.signIn(
         state.usernameField.value,
@@ -59,6 +61,7 @@ class LoginCubit extends Cubit<LoginState> {
         haveStore: false,
       ));
     }, (right) {
+      userRepository.rolePermission();
       emit(state.copyWith(
         statusSubmission: FormzStatus.submissionSuccess,
         haveStore: true,
@@ -71,7 +74,6 @@ class LoginCubit extends Cubit<LoginState> {
     emit(state.copyWith(
       usernameField: field,
     ));
-    print(state.toString());
   }
 
   passwordChange(String value) {
@@ -79,6 +81,5 @@ class LoginCubit extends Cubit<LoginState> {
     emit(state.copyWith(
       passwordField: field,
     ));
-    print(state.toString());
   }
 }

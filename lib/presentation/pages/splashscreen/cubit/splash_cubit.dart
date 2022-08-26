@@ -1,4 +1,5 @@
 import 'package:ala_pos/domain/repositories/auth_repository.dart';
+import 'package:ala_pos/domain/repositories/user_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -9,9 +10,11 @@ part 'splash_cubit.freezed.dart';
 @injectable
 class SplashCubit extends Cubit<SplashState> {
   final AuthRepository _authRepository;
+  final UserRepository _userRepository;
 
-  SplashCubit({required AuthRepository authRepository})
+  SplashCubit({required AuthRepository authRepository, required UserRepository userRepository})
       : _authRepository = authRepository,
+        _userRepository = userRepository,
         super(SplashState.loading());
 
   startTime() {
@@ -27,6 +30,7 @@ class SplashCubit extends Cubit<SplashState> {
     checkToken.fold((l) {
       emit(SplashState.loaded(false));
     }, (r) {
+      _userRepository.rolePermission();
       emit(SplashState.loaded(r.loggedStatus));
     });
   }

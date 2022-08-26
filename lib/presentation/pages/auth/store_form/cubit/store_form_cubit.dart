@@ -1,6 +1,7 @@
 import 'package:ala_pos/domain/models/store/store_category_model.dart';
 import 'package:ala_pos/domain/models/store/store_model.dart';
 import 'package:ala_pos/domain/repositories/store_repository.dart';
+import 'package:ala_pos/domain/repositories/user_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -11,9 +12,10 @@ part 'store_form_cubit.freezed.dart';
 @injectable
 class StoreFormCubit extends Cubit<StoreFormState> {
   final StoreRepository storeRepository;
+  final UserRepository userRepository;
   late List<StoreCategoryModel> listCategory;
 
-  StoreFormCubit(this.storeRepository) : super(StoreFormState.initial()) {
+  StoreFormCubit(this.storeRepository, this.userRepository) : super(StoreFormState.initial()) {
     listCategory = storeRepository.getStoreCategory();
   }
 
@@ -24,6 +26,7 @@ class StoreFormCubit extends Cubit<StoreFormState> {
     result.fold((l) {
       emit(StoreFormState.failed(message: l.message));
     }, (r) {
+      userRepository.rolePermission();
       emit(StoreFormState.success());
     });
   }

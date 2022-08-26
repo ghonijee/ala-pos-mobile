@@ -101,8 +101,8 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       () => _i21.FormUserCubit(get<_i15.UserRepository>()));
   gh.factory<_i22.ListProductCubit>(() => _i22.ListProductCubit(
       get<_i8.ProductRepository>(), get<_i11.StoreRepository>()));
-  gh.factory<_i23.LoginCubit>(() =>
-      _i23.LoginCubit(get<_i16.AuthRepository>(), get<_i11.StoreRepository>()));
+  gh.factory<_i23.LoginCubit>(() => _i23.LoginCubit(get<_i16.AuthRepository>(),
+      get<_i11.StoreRepository>(), get<_i15.UserRepository>()));
   gh.factory<_i24.MasterProductCubit>(() => _i24.MasterProductCubit(
       get<_i8.ProductRepository>(), get<_i11.StoreRepository>()));
   gh.factory<_i25.ReceiptCubit>(
@@ -111,10 +111,11 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       () => _i26.RegisterCubit(get<_i16.AuthRepository>()));
   gh.factory<_i27.SideMenuCubit>(() => _i27.SideMenuCubit(
       get<_i16.AuthRepository>(), get<_i11.StoreRepository>()));
-  gh.factory<_i28.SplashCubit>(
-      () => _i28.SplashCubit(authRepository: get<_i16.AuthRepository>()));
-  gh.factory<_i29.StoreFormCubit>(
-      () => _i29.StoreFormCubit(get<_i11.StoreRepository>()));
+  gh.factory<_i28.SplashCubit>(() => _i28.SplashCubit(
+      authRepository: get<_i16.AuthRepository>(),
+      userRepository: get<_i15.UserRepository>()));
+  gh.factory<_i29.StoreFormCubit>(() => _i29.StoreFormCubit(
+      get<_i11.StoreRepository>(), get<_i15.UserRepository>()));
   gh.factory<_i30.SubmitTransactionCubit>(
       () => _i30.SubmitTransactionCubit(get<_i13.TransactionRepository>()));
   gh.factory<_i31.TransactionDetailCubit>(

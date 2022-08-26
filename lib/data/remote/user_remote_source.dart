@@ -94,4 +94,17 @@ class UserRemoteSource {
       rethrow;
     }
   }
+
+  Future<ApiResponse> rolePermission(String id) async {
+    Dio dio = await apiClient.instance();
+    try {
+      Response response = await dio.get("role/user/$id");
+
+      return SuccessResponse.fromJson(response.data);
+    } on DioError catch (e) {
+      return FailedResponse(message: e.toString(), status: false);
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

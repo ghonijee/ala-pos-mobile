@@ -31,4 +31,31 @@ class LocalStorage {
 
     storage.clear();
   }
+
+  /// Store list to local storeage
+  /// each data must have primary key with properties [key]
+  storeList<T>(String boxName, List<T> data) async {
+    var box = await Hive.openBox<T>(boxName);
+    for (T item in data) {
+      box.put(item.key, value);
+    }
+  }
+
+  /// Find spesific data by Key on BoxList
+  /// return [T] data if exist and [null]
+  /// when data not exist.
+  findByKey<T>(String boxName, id) async {
+    var box = await Hive.openBox<T>(boxName);
+    return box.get(id);
+  }
+
+  store<T>(String boxName, T data) async {
+    var box = await Hive.openBox<T>(boxName);
+    return box.put(boxName, data);
+  }
+
+  show<T>(String boxName) async {
+    var box = await Hive.openBox<T>(boxName);
+    return box.get(boxName);
+  }
 }
