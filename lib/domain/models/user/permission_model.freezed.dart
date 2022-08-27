@@ -28,7 +28,7 @@ mixin _$PermissionModel {
   @JsonKey(name: "description")
   String get description => throw _privateConstructorUsedError;
   @JsonKey(name: "is_active")
-  String get isActive => throw _privateConstructorUsedError;
+  int get isActive => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -46,7 +46,7 @@ abstract class $PermissionModelCopyWith<$Res> {
       @JsonKey(name: "key") String key,
       @JsonKey(name: "name") String name,
       @JsonKey(name: "description") String description,
-      @JsonKey(name: "is_active") String isActive});
+      @JsonKey(name: "is_active") int isActive});
 }
 
 /// @nodoc
@@ -86,7 +86,7 @@ class _$PermissionModelCopyWithImpl<$Res>
       isActive: isActive == freezed
           ? _value.isActive
           : isActive // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
     ));
   }
 }
@@ -103,7 +103,7 @@ abstract class _$$_PermissionModelCopyWith<$Res>
       @JsonKey(name: "key") String key,
       @JsonKey(name: "name") String name,
       @JsonKey(name: "description") String description,
-      @JsonKey(name: "is_active") String isActive});
+      @JsonKey(name: "is_active") int isActive});
 }
 
 /// @nodoc
@@ -145,7 +145,7 @@ class __$$_PermissionModelCopyWithImpl<$Res>
       isActive: isActive == freezed
           ? _value.isActive
           : isActive // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
     ));
   }
 }
@@ -176,7 +176,7 @@ class _$_PermissionModel implements _PermissionModel {
   final String description;
   @override
   @JsonKey(name: "is_active")
-  final String isActive;
+  final int isActive;
 
   @override
   String toString() {
@@ -225,7 +225,7 @@ abstract class _PermissionModel implements PermissionModel {
           @JsonKey(name: "key") required final String key,
           @JsonKey(name: "name") required final String name,
           @JsonKey(name: "description") required final String description,
-          @JsonKey(name: "is_active") required final String isActive}) =
+          @JsonKey(name: "is_active") required final int isActive}) =
       _$_PermissionModel;
 
   factory _PermissionModel.fromJson(Map<String, dynamic> json) =
@@ -244,7 +244,7 @@ abstract class _PermissionModel implements PermissionModel {
   String get description;
   @override
   @JsonKey(name: "is_active")
-  String get isActive;
+  int get isActive;
   @override
   @JsonKey(ignore: true)
   _$$_PermissionModelCopyWith<_$_PermissionModel> get copyWith =>

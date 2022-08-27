@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:core/core.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -98,7 +99,8 @@ class UserRemoteSource {
   Future<ApiResponse> rolePermission(String id) async {
     Dio dio = await apiClient.instance();
     try {
-      Response response = await dio.get("role/user/$id");
+      Response response = await dio.get("/role/user/$id");
+      log(response.toString());
 
       return SuccessResponse.fromJson(response.data);
     } on DioError catch (e) {

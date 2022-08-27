@@ -12,7 +12,7 @@ _$_PermissionModel _$$_PermissionModelFromJson(Map<String, dynamic> json) =>
       key: json['key'] as String,
       name: json['name'] as String,
       description: json['description'] as String,
-      isActive: json['is_active'] as String,
+      isActive: json['is_active'] as int,
     );
 
 Map<String, dynamic> _$$_PermissionModelToJson(_$_PermissionModel instance) =>

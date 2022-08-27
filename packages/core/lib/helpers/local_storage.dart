@@ -37,7 +37,7 @@ class LocalStorage {
   storeList<T>(String boxName, List<T> data) async {
     var box = await Hive.openBox<T>(boxName);
     for (T item in data) {
-      box.put(item.key, value);
+      box.add(item);
     }
   }
 
@@ -45,8 +45,8 @@ class LocalStorage {
   /// return [T] data if exist and [null]
   /// when data not exist.
   findByKey<T>(String boxName, id) async {
-    var box = await Hive.openBox<T>(boxName);
-    return box.get(id);
+    // var box = await Hive.openBox<T>(boxName);
+    // return box.get(id);
   }
 
   store<T>(String boxName, T data) async {

@@ -52,8 +52,8 @@ class UserRepository {
 
       RoleModel data = RoleModel.fromJson(response.data);
 
-      storage.store<RoleModel>(Constant.userRole, data);
-      storage.storeList<PermissionModel>(Constant.userPermissionList, data.permissions);
+      // storage.setValue(Constant.userRole, data.toJson());
+      // storage.storeList<PermissionModel>(Constant.userPermissionList, data.permissions);
 
       return Right(data);
     } catch (e) {

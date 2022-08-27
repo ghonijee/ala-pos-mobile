@@ -10,7 +10,7 @@ class PermissionModel with _$PermissionModel {
     @JsonKey(name: "key") required String key,
     @JsonKey(name: "name") required String name,
     @JsonKey(name: "description") required String description,
-    @JsonKey(name: "is_active") required String isActive,
+    @JsonKey(name: "is_active") required int isActive,
   }) = _PermissionModel;
 
   factory PermissionModel.fromJson(json) => _$PermissionModelFromJson(json);
